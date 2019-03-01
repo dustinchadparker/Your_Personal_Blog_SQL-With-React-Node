@@ -22,7 +22,20 @@ export const all = async () => {
     });
   };
 
+  export const postBlogs = async (id: string, title: string, author: string, content: string) => {
+    return new Promise((resolve, reject) => {
+      Connection.query("call spCheckAuthorExists(?,?,?)", [author, content, title], (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(results);
+      });
+    });
+  };
+
+
 export default {
   all,
-  one
+  one,
+  postBlogs
 };

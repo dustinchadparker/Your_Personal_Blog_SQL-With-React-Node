@@ -30,6 +30,19 @@ router.get('/api/blogs/:id', async (req, res) => {
 
 })
 
+router.post("/", async (req, res, next) => {
+    let info = req.body;
+    let id = req.params.id;
+    try {
+      res.json(await DB.Blogs.postBlogs(id, info.title, info.author, info.content));
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(500);
+    }
+  
+    res.sendStatus(200);
+  });
+
 // router.get('/', async (req, res) => {
 //     try {
 //         let blogs = await DB.Blogs.postBlog(req.params.id);

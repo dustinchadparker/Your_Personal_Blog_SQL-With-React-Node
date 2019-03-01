@@ -28,5 +28,5 @@ interface IAppProps {
 }
 
 interface IAppState {
-    blogs: Array<{title: string, content: string, _created: string}>;
+    blogs: Array<{authorid: string, id: string, title: string, content: string, _created: string}>;
 }
