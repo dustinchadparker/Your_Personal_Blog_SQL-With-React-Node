@@ -1,47 +1,46 @@
-import * as express from 'express';
-import DB from './db';
-
+import * as express from "express";
+import DB from "./db";
 
 const router = express.Router();
 
-router.get('/api/hello', (req, res, next) => {
-    res.json('World');
+router.get("/api/hello", (req, res, next) => {
+  res.json("World");
 });
 
-router.get('/api/blogs', async (req, res) => {
-    try {
-        let blogs = await DB.Blogs.all();
+router.get("/api/blogs", async (req, res) => {
+  try {
+    let blogs = await DB.Blogs.all();
     res.json(blogs);
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
 
-})
-
-router.get('/api/blogs/:id', async (req, res) => {
-    try {
-        let blogs = await DB.Blogs.one(req.params.id);
+router.get("/api/blogs/:id", async (req, res) => {
+  try {
+    let blogs = await DB.Blogs.one(req.params.id);
     res.json(blogs);
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
 
-})
+router.post(`/api/blogs`, async (req, res, next) => {
+  let info = req.body;
+  let id = req.params.id;
 
-router.post("/", async (req, res, next) => {
-    let info = req.body;
-    let id = req.params.id;
-    try {
-      res.json(await DB.Blogs.postBlogs(id, info.title, info.author, info.content));
-    } catch (e) {
-      console.log(e);
-      res.sendStatus(500);
-    }
-  
+  try {
+    res.json(
+      await DB.Blogs.postBlogs(id, info.author, info.title, info.content)
+    );
     res.sendStatus(200);
-  });
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
 
 // router.get('/', async (req, res) => {
 //     try {
@@ -53,6 +52,5 @@ router.post("/", async (req, res, next) => {
 //     }
 
 // })
-
 
 export default router;

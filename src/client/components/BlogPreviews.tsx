@@ -8,8 +8,15 @@ export default class BlogPreviews extends React.Component<
   constructor(props: IBlogPreviewsProps) {
     super(props);
 
-    this.state = { blogs: [], title: null, content: null, author: null, authorid: null, id: null };
-    this.handleSubmit = this.handleSubmit.bind(this); 
+    this.state = {
+      blogs: [],
+      title: null,
+      content: null,
+      author: null,
+      authorid: null,
+      id: null
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async componentWillMount() {
@@ -19,15 +26,13 @@ export default class BlogPreviews extends React.Component<
   }
 
   async handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
-
-    
     if (this.state.author && this.state.content && this.state.title) {
       let info = {
         id: this.state.id,
-        authorid: "",
         author: this.state.author,
+        title: this.state.title,
         content: this.state.content,
-        title: this.state.title
+        authorid: ""
       };
 
       e.preventDefault();
@@ -47,7 +52,6 @@ export default class BlogPreviews extends React.Component<
       alert("Requires name, title, and a post content!");
     }
   }
-  
 
   showBlogs = () => {
     return (
@@ -73,8 +77,6 @@ export default class BlogPreviews extends React.Component<
     );
   };
 
- 
-  
   render() {
     return (
       <main className="container">
@@ -84,7 +86,6 @@ export default class BlogPreviews extends React.Component<
           <div className="col-md-12">
             <form
               onSubmit={this.handleSubmit}
-
               className="form-group  shadow-lg bg-white border border-primary rounded"
             >
               <label className="ml-1 mb-1 font-weight-bold">Name:</label>
@@ -127,7 +128,13 @@ export default class BlogPreviews extends React.Component<
 interface IBlogPreviewsProps {}
 
 interface IBlogPreviewsState {
-  blogs: Array<{ id: string, authorid: string, title: string; content: string; _created: string }>;
+  blogs: Array<{
+    id: string;
+    authorid: string;
+    title: string;
+    content: string;
+    _created: string;
+  }>;
   title: string;
   author: string;
   content: string;
