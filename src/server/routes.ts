@@ -3,9 +3,6 @@ import DB from "./db";
 
 const router = express.Router();
 
-router.get("/api/hello", (req, res, next) => {
-  res.json("World");
-});
 
 router.get("/api/blogs", async (req, res) => {
   try {
@@ -30,12 +27,11 @@ router.get("/api/blogs/:id", async (req, res) => {
 router.post(`/api/blogs`, async (req, res, next) => {
   let info = req.body;
   let id = req.params.id;
-
+  
   try {
-    res.json(
-      await DB.Blogs.postBlogs(id, info.author, info.title, info.content)
-    );
-    res.sendStatus(200);
+    let blogs = await DB.Blogs.postBlogs(id, info.author, info.title, info.content)
+    res.json(blogs);
+  
   } catch (e) {
     console.log(e);
     res.sendStatus(500);

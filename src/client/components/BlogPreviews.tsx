@@ -1,5 +1,6 @@
 import * as React from "react";
-import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+import { Link } from "react-router-dom";
+import OneBlog from './OneBlog';
 
 export default class BlogPreviews extends React.Component<
   IBlogPreviewsProps,
@@ -61,14 +62,15 @@ export default class BlogPreviews extends React.Component<
           {this.state.blogs.map(blog => {
             return (
               <section>
+                <Link to={`/api/blogs/${blog.id}` }>
                 <div className="d-flex w-100 justify-content-between">
                   <h5 className="mb-1">{blog.title}</h5>
                   <small>{`${blog._created.slice(
                     0,
                     10
                   )} @ ${blog._created.slice(11, 16)}`}</small>
-                </div>
-                <p className="mb-1">{blog.content}</p>
+                </div></Link>
+                <p className="mb-3">{blog.content}</p>
               </section>
             );
           })}

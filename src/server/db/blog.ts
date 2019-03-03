@@ -33,8 +33,10 @@ const postBlogs = async (
   content: string
 ) => {
   return new Promise((resolve, reject) => {
+
+
     Connection.query(
-      "call spCheckAuthorExists(?,?,?);",
+      "call spCheckAuthorExists(?,?,?)",
       [author, content, title],
       (err, results) => {
         if (err) {

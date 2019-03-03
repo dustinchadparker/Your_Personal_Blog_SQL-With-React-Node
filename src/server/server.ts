@@ -2,14 +2,14 @@ import * as path from "path";
 import * as express from "express";
 import apiRouter from "./routes";
 
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 const app = express();
 // parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 
 let p = path.join(__dirname, "../public");
 console.log(p);

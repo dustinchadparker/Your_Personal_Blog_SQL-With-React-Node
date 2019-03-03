@@ -1,0 +1,5 @@
+section:hover {
+    background-color: rgb(149, 193, 235, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+}
