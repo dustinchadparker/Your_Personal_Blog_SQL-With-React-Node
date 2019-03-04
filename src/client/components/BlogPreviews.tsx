@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import OneBlog from './OneBlog';
 
 export default class BlogPreviews extends React.Component<
   IBlogPreviewsProps,
@@ -61,14 +60,11 @@ export default class BlogPreviews extends React.Component<
         <div className="list-group">
           {this.state.blogs.map(blog => {
             return (
-              <section>
-                <Link to={`/api/blogs/${blog.id}` }>
+              <section className="mb-1">
+                <Link key={blog.id} to={`/api/blogs/${blog.id}`}>
                 <div className="d-flex w-100 justify-content-between">
                   <h5 className="mb-1">{blog.title}</h5>
-                  <small>{`${blog._created.slice(
-                    0,
-                    10
-                  )} @ ${blog._created.slice(11, 16)}`}</small>
+                  
                 </div></Link>
                 <p className="mb-3">{blog.content}</p>
               </section>
@@ -127,7 +123,9 @@ export default class BlogPreviews extends React.Component<
   }
 }
 
-interface IBlogPreviewsProps {}
+interface IBlogPreviewsProps {
+  key: string;
+}
 
 interface IBlogPreviewsState {
   blogs: Array<{
